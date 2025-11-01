@@ -1,0 +1,70 @@
+<ion-content class="tasks-content">
+  <div class="tasks-wrapper">
+    <h2 class="tasks-title">Lista de Tareas</h2>
+
+    <div class="tasks-actions">
+      <ion-select class="category-select" placeholder="Filtrar por categoría" [interfaceOptions]="selectOptions"
+        (ionChange)="onCategoryChange($event.detail.value)">
+        <ion-select-option *ngFor="let cat of selectCategorys" [value]="cat.id">
+          {{ cat.name }}
+        </ion-select-option>
+      </ion-select>
+
+      <ion-button color="purple" class="add-task-button" (click)="openTaskModal()">
+        <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+        Añadir
+      </ion-button>
+    </div>
+
+    <ion-list class="tasks-list">
+      <ion-card *ngFor="let task of paginatedTasks" class="task-card">
+        <ion-item lines="none">
+          <ion-label>
+            <h2 [class.line-through]="task.completed" class="task-title">
+              {{ task.title }}
+            </h2>
+
+            <p class="task-category">
+              <strong>Categoría: </strong>{{ task.category.name || 'Sin descripción' }}
+            </p>
+
+          </ion-label>
+
+
+          <ion-button fill="clear" color="purple" [id]="'click-trigger-' + task.id" *ngIf="newFeatureEnabled">
+            <ion-icon name="alert-outline"></ion-icon>
+          </ion-button>
+          <ion-popover [trigger]="'click-trigger-' + task.id" side="bottom" alignment="center" size="auto"
+            *ngIf="newFeatureEnabled">
+            <ng-template>
+              <p class="ion-padding"><strong>Descripción: </strong>{{task.description}}</p>
+            </ng-template>
+          </ion-popover>
+
+
+          <ion-button fill="clear" color="success" (click)="toggleTaskCompletion(task)" [disabled]="task.completed"
+            *ngIf="!task.completed">
+            <ion-icon name="checkmark-done-outline"></ion-icon>
+          </ion-button>
+
+          <ion-button fill="clear" color="purple" (click)="openTaskModal(task)" *ngIf="!task.completed">
+            <ion-icon name="pencil-outline"></ion-icon>
+          </ion-button>
+
+          <ion-button fill="clear" color="danger" (click)="deleteTask(task)">
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-card>
+    </ion-list>
+    <div class="paginator">
+      <ion-button fill="clear" (click)="changePage(-1)" [disabled]="currentPage === 1">Anterior</ion-button>
+      <ion-label>Página {{ currentPage }} de {{ totalPages }}</ion-label>
+      <ion-button fill="clear" (click)="changePage(1)" [disabled]="currentPage === totalPages">Siguiente</ion-button>
+      <ion-select class="category-select-page" [value]="pageSize" (ionChange)="onPageSizeChange()"
+        [interfaceOptions]="selectOptionsPage" [(ngModel)]="pageSize">
+        <ion-select-option *ngFor="let size of pageSizeOptions" [value]="size">{{size}}</ion-select-option>
+      </ion-select>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,35 @@
+<ion-content class="task-modal-content">
+  <div class="modal-wrapper">
+    <h2 class="modal-title">
+      {{ isEdit ? 'Editar tarea' : 'Crear tarea' }}
+    </h2>
+
+    <ion-list lines="none">
+      <ion-item>
+        <ion-label position="stacked">Nombre</ion-label>
+        <ion-input [(ngModel)]="taskData.title" placeholder="Nombre de la tarea"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Descripción</ion-label>
+        <ion-textarea autoGrow="true" [(ngModel)]="taskData.description" placeholder="Descripción breve"></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Categoría</ion-label>
+        <ion-select [(ngModel)]="taskData.category" placeholder="Selecciona una categoría" [compareWith]="compareFn"
+          [interfaceOptions]="selectOptions">
+          <ion-select-option *ngFor="let cat of categorys" [value]="cat">
+            {{ cat.name }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+    <div class="modal-actions">
+      <ion-button expand="block" color="purple" (click)="saveTask()"
+        [disabled]="!taskData.title || !taskData.category.id">Guardar</ion-button>
+      <ion-button expand="block" fill="clear" color="medium" (click)="dismiss()">Cancelar</ion-button>
+    </div>
+  </div>
+</ion-content>

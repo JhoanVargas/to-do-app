@@ -1,0 +1,20 @@
+<ion-content class="category-modal-content">
+  <div class="modal-wrapper">
+    <h2 class="modal-title">
+      {{ isEdit ? 'Editar categoría' : 'Crear categoría' }}
+    </h2>
+
+    <ion-list lines="none">
+      <ion-item>
+        <ion-label position="stacked">Nombre</ion-label>
+        <ion-input [(ngModel)]="categoryData.name" placeholder="Nombre de la categoría"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <div class="modal-actions">
+      <ion-button expand="block" color="purple" (click)="saveCategory()"
+        [disabled]="!categoryData.name">Guardar</ion-button>
+      <ion-button expand="block" fill="clear" color="medium" (click)="dismiss()">Cancelar</ion-button>
+    </div>
+  </div>
+</ion-content>

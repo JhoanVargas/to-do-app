@@ -1,0 +1,46 @@
+.task-modal-content {
+  --background: rgba(255, 255, 255, 0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+
+  .modal-wrapper {
+    width: 100%;
+    background: #fff;
+    border-radius: 16px;
+    padding: 2rem;
+  }
+
+  .modal-title {
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+    color: #5e0193;
+  }
+
+  ion-item {
+    --highlight-color-focused: #a100ff;
+    --highlight-color-valid: #a100ff;
+    --border-radius: 8px;
+  }
+
+  .modal-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+
+  @media (max-width: 600px) {
+    .modal-wrapper {
+      padding: 1.2rem;
+      border-radius: 12px;
+    }
+
+    .modal-title {
+      font-size: 1.2rem;
+    }
+  }
+}

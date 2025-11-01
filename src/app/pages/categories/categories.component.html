@@ -1,0 +1,43 @@
+<ion-content class="categorys-content">
+  <div class="categorys-wrapper">
+    <h2 class="categorys-title">Lista de Categorías</h2>
+
+    <div class="categorys-actions">
+
+      <ion-button color="purple" class="add-category-button" (click)="openCategoryModal()">
+        <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+        Añadir
+      </ion-button>
+    </div>
+
+    <ion-list class="categorys-list">
+      <ion-card *ngFor="let category of paginatedCategorys" class="category-card">
+        <ion-item lines="none">
+          <ion-label>
+            <h2 class="category-title">
+              {{ category.name }}
+            </h2>
+          </ion-label>
+
+
+          <ion-button fill="clear" color="purple" (click)="openCategoryModal(category)">
+            <ion-icon name="pencil-outline"></ion-icon>
+          </ion-button>
+
+          <ion-button fill="clear" color="danger" (click)="deleteCategory(category)">
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-card>
+    </ion-list>
+    <div class="paginator">
+      <ion-button fill="clear" (click)="changePage(-1)" [disabled]="currentPage === 1">Anterior</ion-button>
+      <ion-label>Página {{ currentPage }} de {{ totalPages }}</ion-label>
+      <ion-button fill="clear" (click)="changePage(1)" [disabled]="currentPage === totalPages">Siguiente</ion-button>
+      <ion-select class="category-select-page" [value]="pageSize" (ionChange)="onPageSizeChange()"
+        [interfaceOptions]="selectOptionsPage" [(ngModel)]="pageSize">
+        <ion-select-option *ngFor="let size of pageSizeOptions" [value]="size">{{size}}</ion-select-option>
+      </ion-select>
+    </div>
+  </div>
+</ion-content>
