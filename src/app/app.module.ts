@@ -9,10 +9,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { initializeApp } from 'firebase/app';
 import { getRemoteConfig } from 'firebase/remote-config';
 import { environment } from '../environments/environment';
+import { defineCustomElements } from '@ionic/pwa-elements/loader';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [BrowserModule, IonicModule.forRoot({mode: 'md'}), AppRoutingModule],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     {
@@ -30,4 +31,8 @@ import { environment } from '../environments/environment';
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+  constructor() {
+    defineCustomElements(window);
+  }
+}
