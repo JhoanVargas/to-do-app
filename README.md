@@ -1,6 +1,6 @@
 # ✅ To-Do App
 
-This is a simple to-do list application built with Ionic and Angular.
+Esta es una aplicación simple de lista de tareas construida con **Ionic** y **Angular**.
 
 ## 📋 Requisitos previos
 
